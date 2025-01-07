@@ -22,7 +22,7 @@ inputDisplay.value = displayedNumber;
 
 //Display functions
 const updateDisplay = function(number){
-    if(displayedNumber === "0"){
+    if(displayedNumber === "0" || displayedNumber === "ERROR"){
         displayedNumber = number;
     }
     else{
@@ -48,6 +48,11 @@ const operate = function(left,right){
             return left * right;
 
         case '/':
+            if(right === 0){
+                alert("Cant divide by zero BOZO");
+                handleClear();
+                return null;
+            }
             return (left / right).toFixed(5);
     }
 };
@@ -65,6 +70,9 @@ const handleEqual = function(){
     let left = Number(leftOperand);
     let right = Number(righOperand);
     const result = operate(left,right);
+    if(!result){
+        return;
+    }
     displayedNumber = "";
     updateDisplay(result.toString());
     updateLastOp();
@@ -96,13 +104,12 @@ const handleDelete = function(){
     }
     lastPressed = "delete";
 }
-
 //Setup Functions
 
 const setUpNumberInput = function (){
     numberButtons.forEach((button) =>{
         button.addEventListener("click",(e) => {
-            if(lastPressed === "="){
+            if(lastPressed === "=" || displayedNumber==="ERROR"){
                 handleClear();
             }
             let number = button.textContent;
