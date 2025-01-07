@@ -58,7 +58,7 @@ button{
     height: 50%;
     text-align: right;
     font-size: 32.5px;
-    display: flex;
+    padding-right: 10px;
 }
 
 #number-input{
@@ -89,8 +89,10 @@ button{
     gap: 5px;
 }
 
-#number-grid,
-#ops-grid{
+#number-button,
+#ops-button,
+#TODO,
+#equal-button{
     width: 65px;
     height: 65px;
     border-radius: 5px;
